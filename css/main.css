@@ -1,0 +1,18 @@
+.centered {
+    margin-right: auto;
+    margin-left: auto;
+}
+.input-top{
+    height: 50px;
+    border: 5px solid gray;
+    border-radius: 10px 10px 0px 0px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+.input-bottom{
+    height: 50px;
+    border: 5px solid gray;
+    border-radius: 0px 0px 10px 10px;
+    padding-top: 0px;
+    margin-top: 0px;
+}
