@@ -1,18 +1,72 @@
-.centered {
+body {
+    font-family: sans-serif;
+}
+.centered{
     margin-right: auto;
     margin-left: auto;
 }
-.input-top{
-    height: 50px;
-    border: 5px solid gray;
-    border-radius: 10px 10px 0px 0px;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
+.text-center{
+    text-align: center;
+    align-content: center;
+    align-self: center;
+    align-items: center;
 }
-.input-bottom{
-    height: 50px;
-    border: 5px solid gray;
-    border-radius: 0px 0px 10px 10px;
-    padding-top: 0px;
+.label-before, .field input:valid + label::before, .field input:focus + label::before {
+    line-height: 20px;
+    font-size: 12px;
+    top: -10px;
+    background: #fff;
+    padding: 0 6px;
+    left: 40%;
+    text-align: center;
+}
+
+.container {
+    width: 80%;
+    margin: 30px 10%;
+    height: 100%;
+}
+
+.field {
+    position: relative;
+}
+.field label::before {
+    content: attr(title);
+    position: absolute;
+    top: 0;
+    left: 40%;
+    line-height: 40px;
+    font-size: 14px;
+    color: #777;
+    transition: 300ms all;
+    margin-bottom: 0px;
     margin-top: 0px;
+    text-align: center;
+}
+.field input {
+    line-height: 40px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #222;
+    border: 2px solid darkgrey;
+    width:22%;
+}
+.field input:focus {
+    outline: 0;
+    border-color: darkgrey;
+}
+.field input:valid + label::before {
+    content: attr(data-title);
+}
+.field input:focus + label::before {
+    color: darkgrey;
+}
+#outsider {position: relative;}
+
+#middle {
+    position: absolute;
+    margin-top: 20%;
+    height: 500px;
+    width:100%;
 }
