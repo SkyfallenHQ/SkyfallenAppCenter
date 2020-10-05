@@ -162,7 +162,7 @@ if($_POST["action"]=="listprivateapps"){
                             session_start();
                             http_response_code(200);
                             $resparr = array();
-                            $sql = "SELECT * FROM apps WHERE creator='".$username."' ispublic='PRIVATE'";
+                            $sql = "SELECT * FROM apps WHERE creator='".$username."' and ispublic='PRIVATE'";
                             if($result = mysqli_query($link, $sql)){
                                 if(mysqli_num_rows($result) > 0){
                                     while($row = mysqli_fetch_array($result)){
