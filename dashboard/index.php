@@ -24,6 +24,24 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <!-- Page plugins -->
     <!-- Argon CSS -->
     <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+    <script>
+        function logoutbutton(){
+            var http = new XMLHttpRequest();
+            var url = '/api/';
+            var params = 'action=logout';
+            http.open('POST', url, true);
+
+        //Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        http.onreadystatechange = function() {//Call a function when the state changes.
+        if(http.readyState == 4 && http.status == 200) {
+            window.location.href = "/";
+        }
+        }
+        http.send(params);
+        }
+    </script>
 </head>
 
 <body>
@@ -94,7 +112,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                             </div>
                         </a>
                         <div class="dropdown-menu  dropdown-menu-right ">
-                            <button style="outline: none; background: transparent; border: none;" type="button">
+                            <button style="outline: none; background: transparent; border: none;" type="button" onclick="logoutbutton()">
                             <a href="#" class="dropdown-item">
                                 <i class="ni ni-user-run"></i>
                                 <span>Logout</span>

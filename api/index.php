@@ -91,6 +91,14 @@ if($_POST["action"]=="login"){
         // Close connection
         mysqli_close($link);
     }
-    http_response_code(404);
+}
+if($_POST["action"]=="logout"){
+    session_name("AppCenterSession");
+    session_start();
+    $_SESSION = array();
+    session_destroy();
+    http_response_code(200);
     die();
 }
+http_response_code(404);
+die();
