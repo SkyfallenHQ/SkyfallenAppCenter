@@ -221,7 +221,26 @@ if($result = mysqli_query($link, $sql)){
 die();
     mysqli_close($link);
 }
-
+if($_POST["action"]=="verifysecret"){
+    include_once "../configuration.php";
+    $resparr = array();
+    $sql = "SELECT * FROM apps WHERE creator='".$_POST["username"]."' and appid='".$_POST["appid"]."' and appsecret='".$_POST["appsecret"]."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+            while($row = mysqli_fetch_array($result)){
+                http_response_code(200);
+            }
+            mysqli_free_result($result);
+            die();
+        } else{
+            http_response_code(403);
+        }
+    } else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    }
+    die();
+    mysqli_close($link);
+}
 if($_POST["action"]=="getsecret"){
     // Initialize the session
     session_name("AppCenterSession");
