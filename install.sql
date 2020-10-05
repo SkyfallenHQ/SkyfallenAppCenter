@@ -1,5 +1,5 @@
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `verified` varchar(255) DEFAULT NULL,
@@ -21,4 +21,3 @@ ALTER TABLE `users`
 
   ALTER TABLE `apps`
   ADD UNIQUE KEY `appid` (`appid`);
-  ALTER TABLE `users` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
