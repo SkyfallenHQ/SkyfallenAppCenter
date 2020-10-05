@@ -1,7 +1,5 @@
 <?php
-$ok = false;
 if($_POST["action"]=="login"){
-    $ok = true;
     // Initialize the session
     session_name("AppCenterSession");
     session_start();
@@ -18,10 +16,6 @@ if($_POST["action"]=="login"){
 // Define variables and initialize with empty values
     $username = $password = "";
     $username_err = $password_err = "";
-
-// Processing form data when form is submitted
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-
         // Check if username is empty
         if(empty(trim($_POST["username"]))){
             http_response_code(403);
@@ -68,17 +62,20 @@ if($_POST["action"]=="login"){
                                 $_SESSION["loggedin"] = true;
                                 $_SESSION["id"] = $id;
                                 $_SESSION["username"] = $username;
+
+                                // Redirect user to welcome page
                                 http_response_code(200);
                                 die();
                             } else{
                                 // Display an error message if password is not valid
-                                $password_err = "The password you entered was not valid.";
+                                http_response_code(403);
+                                die();
                             }
                         }
                     } else{
                         // Display an error message if username doesn't exist
                         http_response_code(403);
-                        die();
+                        die();;
                     }
                 } else{
                     http_response_code(500);
@@ -87,15 +84,16 @@ if($_POST["action"]=="login"){
 
                 // Close statement
                 mysqli_stmt_close($stmt);
+            } else {
+                http_response_code(503);
+                die();
             }
         }
 
         // Close connection
         mysqli_close($link);
-    }
 }
 if($_POST["action"]=="logout"){
-    $ok = true;
     session_name("AppCenterSession");
     session_start();
     $_SESSION = array();
@@ -103,7 +101,5 @@ if($_POST["action"]=="logout"){
     http_response_code(200);
     die();
 }
-if(!$ok) {
-    http_response_code(500);
-    die();
-}
+http_response_code(404);
+die();

@@ -22,6 +22,7 @@
     <list default="true" id="ad36af10-36d9-4ec1-9825-5518d207cdd9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/configuration.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +69,7 @@
       <option name="presentableId" value="Default" />
       <updated>1601841258818</updated>
       <workItem from="1601841260194" duration="16211000" />
+      <workItem from="1601900630977" duration="1347000" />
     </task>
     <servers />
   </component>
@@ -84,8 +86,13 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="360" y="222" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601900801717">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="360" y="222" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1601900801717" />
     <state x="715" y="490" key="NewPhpFileDialog" timestamp="1601885783924">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
