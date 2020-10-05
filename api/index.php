@@ -56,6 +56,7 @@ if($_POST["action"]=="login"){
                     // Check if username exists, if yes then verify password
                     if(mysqli_stmt_num_rows($stmt) == 1){
                         // Bind result variables
+                        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
                         mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
                         if(mysqli_stmt_fetch($stmt)){
                             if(password_verify($password, $hashed_password)){
