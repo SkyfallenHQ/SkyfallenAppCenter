@@ -11,7 +11,12 @@ function swaploading(){
 
     http.onreadystatechange = function() {//Call a function when the state changes.
         if(http.readyState == 4 && http.status == 200) {
-            alert(http.responseText);
+            document.getElementById("submit-arrow-pwin-img").src = "/img/ok.png";
+            var delayInMilliseconds = 3000; //1 second
+
+            setTimeout(function() {
+                window.location.href = "/dashboard/";
+            }, delayInMilliseconds);
         }
         if(http.readyState == 4 && http.status == 403) {
             document.getElementById("submit-arrow-pwin-img").src = "/img/error.png";
