@@ -100,5 +100,3 @@ if($_POST["action"]=="logout"){
     http_response_code(200);
     die();
 }
-http_response_code(404);
-die();
