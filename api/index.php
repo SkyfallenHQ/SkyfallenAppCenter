@@ -86,7 +86,7 @@ if($_POST["action"]=="login"){
                 mysqli_stmt_close($stmt);
             } else {
                 http_response_code(503);
-                die();
+                die(mysqli_stmt_error($stmt)." ".mysqli_error($link));
             }
         }
 
