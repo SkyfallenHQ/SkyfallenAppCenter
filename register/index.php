@@ -136,7 +136,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
                     <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                        <h1 class="text-white">Sign in</h1>
+                        <h1 class="text-white">Sign up</h1>
                         <p class="text-lead text-white">Create an account for Skyfallen App Center</p>
                     </div>
                 </div>
