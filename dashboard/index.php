@@ -122,7 +122,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                 <input type="text" class="form-control" name="appname" placeholder="App Name" aria-label="App Name" aria-describedby="basic-addon1">
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="isPublicNew" name="isPublicNew">
+                                <input class="form-check-input" type="checkbox" id="isPublicNew" name="isPublicNew">
                                 <label class="form-check-label" for="defaultCheck1">
                                     Make it Public?
                                 </label>
@@ -131,10 +131,37 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         </form>
                     <?php }
                     if($_GET["app"]=="new" and isset($_POST["appname"])){
-                        $sql = "INSERT INTO apps (appid,appname,appsecret,creator,ispublic,verified) VALUES ('".md5(uniqid(rand(), true))."','".$_POST["appname"]."','".md5(uniqid(rand(), true))."','".$_SESSION["username"]."','".$_POST["isPublicNew"]."','NO')";
+                        if($_POST["isPublicNew"] == "on"){
+                            $ispublicnew = "PUBLIC";
+                        } else {
+                            $ispublicnew = "PRIVATE";
+                        }
+                        $sql = "INSERT INTO apps (appid,appname,appsecret,creator,ispublic,verified) VALUES ('".md5(uniqid(rand(), true))."','".$_POST["appname"]."','".md5(uniqid(rand(), true))."','".$_SESSION["username"]."','".$ispublicnew."','NO')";
                         if($res = mysqli_query($link,$sql)){
+                            $referer = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
+
+                            if (!empty($referer)) {
+
+                                echo '<p><a style="color: white;" href="'. $referer .'" title="Return to the previous page">&laquo; Go back</a></p><br>';
+
+                            } else {
+
+                                echo '<p><a style="color: white;" href="javascript:history.go(-1)" title="Return to the previous page">&laquo; Go back</a></p><br>';
+
+                            }
                             echo "<br><p>Success!</p>";
                         } else {
+                            $referer = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
+
+                            if (!empty($referer)) {
+
+                                echo '<p><a style="color: white;" href="'. $referer .'" title="Return to the previous page">&laquo; Go back</a></p><br>';
+
+                            } else {
+
+                                echo '<p><a style="color: white;" href="javascript:history.go(-1)" title="Return to the previous page">&laquo; Go back</a></p><br>';
+
+                            }
                             echo "<br><p>Error!</p>";
                         }
                     }
@@ -151,6 +178,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                 echo "<th scope='col'>App Name</th>";
                                 echo "<th scope='col'>Public</th>";
                                 echo "<th scope='col'>Edit</th>";
+                                echo "<th scope='col'>Delete</th>";
                                 echo "</tr>";
                             echo "</thead>";
                             echo "<tbody>";
@@ -158,7 +186,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                             echo "<tr>";
                                 echo "<td>" . $row['appname'] . "</td>";
                                 echo "<td>" . $row['ispublic'] . "</td>";
-                                echo "<td><a style='color: white;' href='?app=edit&appid=" . $row['ispublic'] . "' >Edit</a></td>";
+                                echo "<td><a style='color: white;' href='?app=edit&appid=" . $row['appid'] . "' >Edit</a></td>";
+                                echo "<td><a style='color: white;' href='?app=delete&appid=" . $row['appid'] . "' >Delete</a></td>";
                                 echo "</tr>";
                             }
                             echo "</table>";
@@ -171,7 +200,99 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         }
 
                         // Close connection
-                        mysqli_close($link); } ?>
+                        mysqli_close($link); }
+                    if($_GET["app"]=="delete"){
+                        $sql = "DELETE FROM apps WHERE appid='".$_GET["appid"]."'";
+                        if($result = mysqli_query($link, $sql)){
+                            $referer = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
+
+                            if (!empty($referer)) {
+
+                                echo '<p><a style="color: white;" href="'. $referer .'" title="Return to the previous page">&laquo; Go back</a></p><br>';
+
+                            } else {
+
+                                echo '<p><a style="color: white;" href="javascript:history.go(-1)" title="Return to the previous page">&laquo; Go back</a></p><br>';
+
+                            }
+                        } else{
+                            echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                        }
+
+                        // Close connection
+                        mysqli_close($link); }
+                    if($_GET["app"]=="edit"){
+                        $sql = "SELECT * FROM apps WHERE creator='".$_SESSION["username"]."' and appid='".$_GET["appid"]."'";
+                        if($result = mysqli_query($link, $sql)){
+                            if(mysqli_num_rows($result) == 1){
+                                echo '<div style="text-align: center; width: 100%; text-align: center;">';
+                                while($row = mysqli_fetch_array($result)){
+                                    $referer = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
+
+                                    if (!empty($referer)) {
+
+                                        echo '<p><a style="color: white;" href="'. $referer .'" title="Return to the previous page">&laquo; Go back</a></p>';
+
+                                    } else {
+
+                                        echo '<p><a style="color: white;" href="javascript:history.go(-1)" title="Return to the previous page">&laquo; Go back</a></p>';
+
+                                    }
+                                    ?>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">App Name</span>
+                                        </div>
+                                        <input type="text" class="form-control" aria-label="App Name" aria-describedby="basic-addon1" value="<?php echo $row["appname"]; ?>" disabled>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">App ID</span>
+                                        </div>
+                                        <input type="text" class="form-control" aria-label="App ID" aria-describedby="basic-addon1" value="<?php echo $row["appid"]; ?>" disabled>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">App Secret</span>
+                                        </div>
+                                        <input type="text" class="form-control" aria-label="App Secret" aria-describedby="basic-addon1" value="<?php echo $row["appsecret"]; ?>" disabled>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Is Public</span>
+                                        </div>
+                                        <input type="text" class="form-control" aria-label="Is Public?" aria-describedby="basic-addon1" value="<?php echo $row["ispublic"]; ?>" disabled>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">App Creator</span>
+                                        </div>
+                                        <input type="text" class="form-control" aria-label="App Creator" aria-describedby="basic-addon1" value="<?php echo $row["creator"]; ?>" disabled>
+                                    </div>
+                                    <?php
+                                }
+                                mysqli_free_result($result);
+                            } else{
+                                $referer = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
+
+                                if (!empty($referer)) {
+
+                                    echo '<p><a style="color: white;" href="'. $referer .'" title="Return to the previous page">&laquo; Go back</a></p><br>';
+
+                                } else {
+
+                                    echo '<p><a style="color: white;" href="javascript:history.go(-1)" title="Return to the previous page">&laquo; Go back</a></p><br>';
+
+                                }
+                                echo "Invalid App ID";
+                            }
+                        } else{
+                            echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                        }
+
+                        // Close connection
+                        mysqli_close($link); }
+                    ?>
                 </div>
                 </div>
             </div>
