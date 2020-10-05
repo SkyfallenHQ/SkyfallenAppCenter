@@ -1,6 +1,6 @@
 <?php
 
-include_once "classes/errors.php";
+include_once "classes/error.php";
 
 
 define('DB_SERVER', 'localhost');
