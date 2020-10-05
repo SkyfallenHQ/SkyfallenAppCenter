@@ -1,5 +1,7 @@
 <?php
+$ok = false;
 if($_POST["action"]=="login"){
+    $ok = true;
     // Initialize the session
     session_name("AppCenterSession");
     session_start();
@@ -93,10 +95,15 @@ if($_POST["action"]=="login"){
     }
 }
 if($_POST["action"]=="logout"){
+    $ok = true;
     session_name("AppCenterSession");
     session_start();
     $_SESSION = array();
     session_destroy();
     http_response_code(200);
+    die();
+}
+if(!$ok) {
+    http_response_code(500);
     die();
 }
