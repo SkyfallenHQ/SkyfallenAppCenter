@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <form method="post" class="centered">
+    <form method="post" class="centered" id="form">
         <div class="container centered text-center" id="outsider">
             <div id="middle">
             <div class="field text-center">
@@ -30,7 +30,7 @@
                 <label for="password" title="Please enter your password." data-title="Password"></label>
             </div>
             <div class="field-button">
-                <button type="button" style="border: none; background: transparent;"><img src="img/RightArrow.png" style="height: 30px;"></button>
+                <button type="button" style="border: none; background: transparent;" onclick="swaploading()" id="submit-arrow-pwin-btn" name="submit-arrow-pwin"><img src="img/RightArrow.png" style="height: 30px;" id="submit-arrow-pwin-img" name="submit-arrow-pwin-img"> </button>
             </div>
             </div>
         </div>
