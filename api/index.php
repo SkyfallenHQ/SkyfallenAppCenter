@@ -70,7 +70,8 @@ if($_POST["action"]=="login"){
                                 die();
                             } else{
                                 // Display an error message if password is not valid
-                                $password_err = "The password you entered was not valid.";
+                                http_response_code(403);
+                                die();
                             }
                         }
                     } else{
