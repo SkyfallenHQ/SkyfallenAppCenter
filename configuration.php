@@ -9,6 +9,8 @@ define('DB_PASSWORD', '');
 define('DB_NAME', 'appcenter');
 define("ALLOW_REGISTER", true);
 
+global $link;
+
 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
 if ($link === false) {

@@ -1,6 +1,19 @@
 body {
     font-family: sans-serif;
 }
+.footer{
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    color: darkgrey;
+}
+.footer a{
+    color: grey;
+}
+.footer a:hover{
+    color: grey;
+}
 .centered{
     margin-right: auto;
     margin-left: auto;

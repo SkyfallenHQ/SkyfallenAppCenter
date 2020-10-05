@@ -10,7 +10,7 @@
     <script type="text/javascript" rel="script" src="js/jquery.min.js"></script>
 </head>
 
-<body>
+<body onload="onpagloadcheck()">
     <form method="post" class="centered" id="form">
         <div class="container centered text-center" id="outsider">
             <div id="middle">
@@ -35,5 +35,6 @@
             </div>
         </div>
     </form>
+    <div class="footer"><p class="text-center">Don't have an account? <a href="/register/">Create here</a></p></div>
 </body>
 </html>
