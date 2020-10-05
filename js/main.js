@@ -15,6 +15,11 @@ function swaploading(){
         }
         if(http.readyState == 4 && http.status == 403) {
             document.getElementById("submit-arrow-pwin-img").src = "/img/error.png";
+            var delayInMilliseconds = 1500; //1 second
+
+            setTimeout(function() {
+                document.getElementById("submit-arrow-pwin-img").src = "/img/RightArrow.png";
+            }, delayInMilliseconds);
         }
     }
     http.send(params);
