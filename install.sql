@@ -21,3 +21,5 @@ ALTER TABLE `users`
 
   ALTER TABLE `apps`
   ADD UNIQUE KEY `appid` (`appid`);
+  ALTER TABLE `users`
+  CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
