@@ -226,7 +226,7 @@ if($_POST["action"]=="verifysecret"){
     $resparr = array();
     $sql = "SELECT * FROM apps WHERE creator='".$_POST["username"]."' and appid='".$_POST["appid"]."' and appsecret='".$_POST["appsecret"]."'";
     if($result = mysqli_query($link, $sql)){
-        if(mysqli_num_rows($result) == 0){
+        if(mysqli_num_rows($result) == 1){
             while($row = mysqli_fetch_array($result)){
                 http_response_code(200);
             }
