@@ -1,6 +1,23 @@
 <?php
  require_once "configuration.php";
- ?>
+session_name("AppCenterSession");
+if(isset($_GET["swac_tokenlogin"])){
+    $tokenisvalid = json_decode(file_get_contents("https://tokenexchange.theskyfallen.com/?req=isvalid&token=".$_GET["swac_tokenlogin"]),true);
+    if($tokenisvalid["result"]["isvalid"] == "YES") {
+        $tokenretriaval = json_decode(file_get_contents("https://tokenexchange.theskyfallen.com/?req=retrievedata&token=".$_GET["swac_tokenlogin"]),true);
+        $username = $tokenretriaval["result"]["username"];
+        session_start();
+        $_SESSION["loggedin"] = true;
+        $_SESSION["username"] = $username;
+
+        // Redirect user to welcome page
+        header("location: /dashboard/");
+    } else {
+        die($tokenisvalid["result"]["isvalid"]);
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
