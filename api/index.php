@@ -250,7 +250,7 @@ if($_POST["action"]=="getappname"){
             while($row = mysqli_fetch_array($result)){
                 $retarray = array();
                 $retarray["appname"] = $row["appname"];
-                echo json_encode();
+                echo json_encode($retarray);
                 die();
             }
             mysqli_free_result($result);
