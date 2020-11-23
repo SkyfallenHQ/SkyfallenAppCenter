@@ -241,6 +241,29 @@ if($_POST["action"]=="verifysecret"){
     die();
     mysqli_close($link);
 }
+if($_POST["action"]=="getappname"){
+    include_once "../configuration.php";
+    $resparr = array();
+    $sql = "SELECT * FROM apps WHERE appid='".$_POST["appid"]."'";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) == 1){
+            while($row = mysqli_fetch_array($result)){
+                $retarray = array();
+                $retarray["appname"] = $row["appname"];
+                echo json_encode();
+                die();
+            }
+            mysqli_free_result($result);
+            die();
+        } else{
+            http_response_code(403);
+        }
+    } else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    }
+    die();
+    mysqli_close($link);
+}
 if($_POST["action"]=="getsecret"){
     // Initialize the session
     session_name("AppCenterSession");
